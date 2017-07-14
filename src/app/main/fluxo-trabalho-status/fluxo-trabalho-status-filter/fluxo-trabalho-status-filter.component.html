@@ -1,0 +1,38 @@
+﻿<div class="row">
+  <section class="col-md-6">
+    <div class='form-group'>
+      <label>{{ vm.labels.fluxoTrabalhoStatusId }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.modelFilter.fluxoTrabalhoStatusId' name='fluxoTrabalhoStatusId' />
+    </div>
+  </section>
+  <section class="col-md-6">
+    <div class='form-group'>
+      <label>{{ vm.labels.nome }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.modelFilter.nome' name='nome' />
+    </div>
+  </section>
+  <section class="col-md-6">
+    <div class='form-group'>
+      {{ vm.labels.fluxoTrabalhoTipoId }}
+      <make-select (msChange)="onChange_makeSelect_modelFilter_fluxoTrabalhoTipoId($event)" [dataitem]="'FluxoTrabalhoTipo'"></make-select>
+    </div>
+  </section>
+  <section class="col-md-6">
+    <div class='form-group'>
+      <label>{{ vm.labels.corFundo }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.modelFilter.corFundo' name='corFundo' />
+    </div>
+  </section>
+  <section class="col-md-6">
+    <div class='form-group'>
+      <label>{{ vm.labels.corFonte }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.modelFilter.corFonte' name='corFonte' />
+    </div>
+  </section>
+  <section class="col-md-6">
+    <div class='form-group'>
+      <label>{{ vm.labels.ordem }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.modelFilter.ordem' name='ordem' />
+    </div>
+  </section>
+</div>
