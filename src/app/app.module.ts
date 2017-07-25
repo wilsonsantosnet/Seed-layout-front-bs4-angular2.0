@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
-import { routing } from './app.routing';
+import { routingDefault } from './app.routing';
+import { routingCustom } from './app.custom.routing';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from 'app/common/services/auth.service'
 import { ApiService } from 'app/common/services/api.service';
@@ -24,7 +25,8 @@ import { LoadingComponent } from './common/components/loading.component';
         BrowserModule,
         BrowserAnimationsModule,
         HttpModule,
-        routing,
+        routingDefault,
+        routingCustom,
         SimpleNotificationsModule.forRoot()
     ],
     providers: [AuthService, ApiService],
