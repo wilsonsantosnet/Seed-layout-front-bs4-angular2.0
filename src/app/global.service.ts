@@ -64,7 +64,7 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Target-spa-v2';
+        this.CLIENT_ID = 'Seed-spa';
         this.SCOPE = 'ssosa';
     
     }
