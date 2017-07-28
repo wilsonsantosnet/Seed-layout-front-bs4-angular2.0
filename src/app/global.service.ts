@@ -14,7 +14,7 @@ export class GlobalService {
         return new AuthSettings();
     }
    
-    public static operationExecutedParameters(_selector: string, _operation: any, _message: string) {
+    public static operationExecutedParameters(_selector: string, _operation: any, _message: string = null) {
         return new OperationExecutedParameters(_selector, _operation, _message);
     }
 
