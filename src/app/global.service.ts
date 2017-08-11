@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core'
+import { Routes } from '@angular/router';
 
 export class GlobalService {
 
@@ -19,6 +20,19 @@ export class GlobalService {
     }
 
 };
+
+export class RoutesContainer {
+    public static routesDefault: Routes;
+
+    public static addRootRouting(item: any) {
+        RoutesContainer.routesDefault.push(item);
+    }
+
+    public static addChildrenRouting(item: any) {
+        RoutesContainer.routesDefault[0].children.push(item);
+    }
+
+}
 
 export class OperationExecutedParameters {
 
