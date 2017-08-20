@@ -64,7 +64,7 @@ export class EndPoints {
         this.AUTHAPI = 'http://localhost:4000/api';
         this.AUTH = 'http://localhost:4000/';
         this.APP = 'http://localhost:4200';
-        this.DOWNLOAD = this.DEFAULT + "document/download/";
+        this.DOWNLOAD = this.DEFAULT + "/document/download/";
 
     }
 };
