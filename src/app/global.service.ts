@@ -1,38 +1,34 @@
 import { Injectable, EventEmitter } from '@angular/core'
 import { Routes } from '@angular/router';
+import config  from "../assets/appsettings.json";
 
 export class GlobalService {
 
     static operationExecuted = new EventEmitter<OperationExecutedParameters>();
     static operationRequesting = new EventEmitter<boolean>();
+    static notification = new EventEmitter<string>();
 
+    private static _endpoint;
 
     public static getEndPoints() {
-        return new EndPoints();
+
+        if (!this._endpoint) {
+            this._endpoint = new EndPoints();
+            return this._endpoint;
+        }
+
+        return this._endpoint;
     }
 
     public static getAuthSettings() {
         return new AuthSettings();
     }
-   
+
     public static operationExecutedParameters(_selector: string, _operation: any, _message: string = null) {
         return new OperationExecutedParameters(_selector, _operation, _message);
     }
 
 };
-
-export class RoutesContainer {
-    public static routesDefault: Routes;
-
-    public static addRootRouting(item: any) {
-        RoutesContainer.routesDefault.push(item);
-    }
-
-    public static addChildrenRouting(item: any) {
-        RoutesContainer.routesDefault[0].children.push(item);
-    }
-
-}
 
 export class OperationExecutedParameters {
 
@@ -46,27 +42,40 @@ export class OperationExecutedParameters {
         this.selector = _selector;
         this.operation = _operation;
         this.message = _message;
-
     }
 
 }
 
 export class EndPoints {
 
-    public readonly DEFAULT: string;
-    public readonly AUTHAPI: string;
-    public readonly AUTH: string;
-    public readonly APP: string;
+    public DEFAULT: string;
+    public AUTHAPI: string;
+    public AUTH: string;
+    public APP: string;
+    public CNA_CORPORATIVE_API: string;
+    public CNA_SHOPPING_API: string;
+
     public readonly DOWNLOAD: string;
 
     constructor() {
-        this.DEFAULT = 'http://localhost:8122/api';
-        this.AUTHAPI = 'http://localhost:4000/api';
-        this.AUTH = 'http://localhost:4000/';
-        this.APP = 'http://localhost:4200';
-        this.DOWNLOAD = this.DEFAULT + "/document/download/";
 
+        this.setConfigSettings(config.ConfigSettings);
+        this.DOWNLOAD = this.DEFAULT + "/document/download/";
     }
+
+    
+    private setConfigSettings(configSettings)
+    {
+        this.DEFAULT = configSettings.DEFAULT;
+        this.AUTHAPI = configSettings.AUTHAPI;
+        this.AUTH = configSettings.AUTH;
+        this.APP = configSettings.APP;
+        this.CNA_CORPORATIVE_API = configSettings.CNA_CORPORATIVE_API;
+        this.CNA_SHOPPING_API = configSettings.CNA_SHOPPING_API;
+
+        return true;
+    }
+
 };
 
 export class AuthSettings {
@@ -74,12 +83,11 @@ export class AuthSettings {
     public readonly TYPE_LOGIN: string;
     public readonly CLIENT_ID: string;
     public readonly SCOPE: string;
-   
+
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Seed-spa';
+        this.CLIENT_ID = 'Cna.Escola-spa';
         this.SCOPE = 'ssosa';
-    
     }
 };
