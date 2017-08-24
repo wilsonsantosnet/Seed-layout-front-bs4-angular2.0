@@ -1,4 +1,4 @@
-﻿import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -20,15 +20,17 @@ import { LoadingComponent } from './common/components/loading.component';
         AppComponent,
         MainComponent,
         LoginComponent,
-        LoadingComponent
+        LoadingComponent,
+        ConfirmModalComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpModule,
-        routingDefault,
-        routingCustom,
-        SimpleNotificationsModule.forRoot()
+        RoutingDefault,
+        RoutingCustom,
+        SimpleNotificationsModule.forRoot(),
+        ModalModule.forRoot()
     ],
     providers: [AuthService, ApiService],
     bootstrap: [AppComponent]
