@@ -70,8 +70,6 @@ export class EndPoints {
         this.AUTHAPI = configSettings.AUTHAPI;
         this.AUTH = configSettings.AUTH;
         this.APP = configSettings.APP;
-        this.CNA_CORPORATIVE_API = configSettings.CNA_CORPORATIVE_API;
-        this.CNA_SHOPPING_API = configSettings.CNA_SHOPPING_API;
 
         return true;
     }
