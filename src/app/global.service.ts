@@ -6,7 +6,7 @@ export class GlobalService {
 
     static operationExecuted = new EventEmitter<OperationExecutedParameters>();
     static operationRequesting = new EventEmitter<boolean>();
-    static notification = new EventEmitter<string>();
+    static notification = new EventEmitter<NotificationParameters>();
 
     private static _endpoint;
 
@@ -46,6 +46,21 @@ export class OperationExecutedParameters {
 
 }
 
+export class NotificationParameters {
+
+
+    public event: string;
+    public parentId?: number;
+
+    constructor(_event: string, _parentId?: number) {
+
+        this.event = _event;
+        this.parentId = _parentId;
+
+    }
+
+}
+
 export class EndPoints {
 
     public DEFAULT: string;
@@ -70,6 +85,8 @@ export class EndPoints {
         this.AUTHAPI = configSettings.AUTHAPI;
         this.AUTH = configSettings.AUTH;
         this.APP = configSettings.APP;
+        this.CNA_CORPORATIVE_API = configSettings.CNA_CORPORATIVE_API;
+        this.CNA_SHOPPING_API = configSettings.CNA_SHOPPING_API;
 
         return true;
     }
@@ -85,7 +102,7 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'seed-spa';
+        this.CLIENT_ID = 'Cna.Escola-spa';
         this.SCOPE = 'ssosa';
     }
 };
