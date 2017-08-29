@@ -67,8 +67,6 @@ export class EndPoints {
     public AUTHAPI: string;
     public AUTH: string;
     public APP: string;
-    public CNA_CORPORATIVE_API: string;
-    public CNA_SHOPPING_API: string;
 
     public readonly DOWNLOAD: string;
 
@@ -85,8 +83,6 @@ export class EndPoints {
         this.AUTHAPI = configSettings.AUTHAPI;
         this.AUTH = configSettings.AUTH;
         this.APP = configSettings.APP;
-        this.CNA_CORPORATIVE_API = configSettings.CNA_CORPORATIVE_API;
-        this.CNA_SHOPPING_API = configSettings.CNA_SHOPPING_API;
 
         return true;
     }
