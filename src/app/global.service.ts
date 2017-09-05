@@ -1,14 +1,16 @@
 import { Injectable, EventEmitter } from '@angular/core'
 import { Routes } from '@angular/router';
-import config  from "../assets/appsettings.json";
+import { CacheService } from 'app/common/services/cache.service';
+import { ECacheType } from 'app/common/type-cache.enum';
 
 export class GlobalService {
 
     static operationExecuted = new EventEmitter<OperationExecutedParameters>();
     static operationRequesting = new EventEmitter<boolean>();
     static notification = new EventEmitter<NotificationParameters>();
+    static changeCulture = new EventEmitter<string>();
 
-    private static _endpoint;
+    private static _endpoint: EndPoints;
 
     public static getEndPoints() {
 
@@ -18,6 +20,10 @@ export class GlobalService {
         }
 
         return this._endpoint;
+    }
+
+    public static setEndPoints(config: any) {
+        GlobalService.getEndPoints().setConfigSettings(config);
     }
 
     public static getAuthSettings() {
@@ -48,7 +54,6 @@ export class OperationExecutedParameters {
 
 export class NotificationParameters {
 
-
     public event: string;
     public parentId?: number;
 
@@ -72,19 +77,22 @@ export class EndPoints {
 
     constructor() {
 
-        this.setConfigSettings(config.ConfigSettings);
         this.DOWNLOAD = this.DEFAULT + "/document/download/";
     }
 
-    
-    private setConfigSettings(configSettings)
-    {
+    setConfigSettings(configSettings) {
+        if (configSettings) {
+            this.init(configSettings);
+        }
+    }
+
+    init(configSettings) {
+
         this.DEFAULT = configSettings.DEFAULT;
         this.AUTHAPI = configSettings.AUTHAPI;
         this.AUTH = configSettings.AUTH;
         this.APP = configSettings.APP;
 
-        return true;
     }
 
 };
@@ -98,7 +106,7 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Cna.Escola-spa';
+        this.CLIENT_ID = 'client';
         this.SCOPE = 'ssosa';
     }
 };
