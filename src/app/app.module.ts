@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -14,6 +14,13 @@ import { ApiService } from 'app/common/services/api.service';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { LoadingComponent } from './common/components/loading.component';
+import { MainService } from './main/main.service';
+import { GlobalServiceCulture } from './global.service.culture';
+import { StartupService } from './startup.service';
+
+export function startupServiceFactory(startupService: StartupService): Function {
+    return () => startupService.load();
+}
 
 @NgModule({
     declarations: [
@@ -21,7 +28,7 @@ import { LoadingComponent } from './common/components/loading.component';
         MainComponent,
         LoginComponent,
         LoadingComponent,
-        ConfirmModalComponent
+        ConfirmModalComponent,
     ],
     imports: [
         BrowserModule,
@@ -32,7 +39,20 @@ import { LoadingComponent } from './common/components/loading.component';
         SimpleNotificationsModule.forRoot(),
         ModalModule.forRoot()
     ],
-    providers: [AuthService, ApiService],
+    providers: [
+        HttpModule,
+        StartupService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: startupServiceFactory,
+            deps: [StartupService],
+            multi: true
+        },
+        AuthService,
+        ApiService,
+        MainService,
+        GlobalServiceCulture
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
