@@ -19,15 +19,10 @@ export class MainService extends ServiceBase {
     }
 
 
-    updateCulture(vm: any, culture: string = null) {
-
-        if (culture)
-            this.globalServiceCulture.setCulture(culture);
-
-        this.getInfosTranslated(culture).then(result => {
-            vm.infos = result;
+   updateCulture(vm: any, culture: string = null) {
+        this.getInfosTranslated(this.globalServiceCulture.defineCulture(culture)).then(result => {
+            vm.generalInfos = result;
         });
-
     }
 
     getGeneralInfos() {
@@ -51,24 +46,23 @@ export class MainService extends ServiceBase {
   
     getInfosFields() {
         return {
-
-            buscar: { label: 'Buscar', type: 'string', isKey: false, list: false },
-            voltar: { label: 'Voltar', type: 'int', isKey: false, list: false },
-            sair: { label: 'Sair', type: 'string', isKey: false, list: false },
-            filtro: { label: 'Filtros', type: 'string', isKey: false, list: false },
-            novoItem: { label: 'Novo item', type: 'string', isKey: false, list: false },
-            titulo: { label: 'Titulo', type: 'string', isKey: false, list: false },
-            acao: { label: 'AÃ§Ã£o', type: 'string', isKey: false, list: false },
-            totalRegistro: { label: 'Total de registros', type: 'string', isKey: false, list: false },
-            proximo: { label: 'PrÃ³ximo', type: 'string', isKey: false, list: false },
-            anterior: { label: 'Anterior', type: 'string', isKey: false, list: false },
-            filtrar: { label: 'Filtrar', type: 'string', isKey: false, list: false },
-            salvar: { label: 'Salvar', type: 'string', isKey: false, list: false },
-            cancelar: { label: 'Cancelar', type: 'string', isKey: false, list: false },
-            sim: { label: 'Ok', type: 'string', isKey: false, list: false },
-            imprimir: { label: 'Imprimir', type: 'string', isKey: false, list: false },
-            procurar: { label: 'Procurar', type: 'string', isKey: false, list: false },
-            excluir: { label: 'Excluir', type: 'string', isKey: false, list: false },
+            buscar: { label: 'Buscar' },
+            voltar: { label: 'Voltar' },
+            sair: { label: 'Sair' },
+            filtro: { label: 'Filtros' },
+            novoItem: { label: 'Novo item' },
+            titulo: { label: 'Titulo' },
+            acao: { label: 'AÃ§Ã£o' },
+            totalRegistro: { label: 'Total de registros' },
+            proximo: { label: 'PrÃ³ximo' },
+            anterior: { label: 'Anterior' },
+            filtrar: { label: 'Filtrar' },
+            salvar: { label: 'Salvar' },
+            cancelar: { label: 'Cancelar' },
+            sim: { label: 'Ok' },
+            imprimir: { label: 'Imprimir' },
+            procurar: { label: 'Procurar' },
+            excluir: { label: 'Excluir' },
         }
     }
 }
