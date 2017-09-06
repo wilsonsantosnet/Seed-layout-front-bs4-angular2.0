@@ -39,36 +39,19 @@ export class MainService extends ServiceBase {
         return this._fieldsTransleted;
     }
 
-    getInfosTranslated(culture: string) {
-
-        return new Promise((resolve, reject) => {
-
-            var grupo = "geral";
-            resolve(this.globalServiceCulture.getResource(grupo, culture, this.getInfosFields(), (culture, infosFields) => {
-
-
-                //this.api.setResource('resource')
-                //    .get({ Grupo: grupo, LocationName: culture})
-                //    .subscribe(res => {
-                //        this.globalServiceCulture.setResource(grupo, res.dataList); 
-                //});
-
-
+     getInfosTranslated(culture: string) {
+        var grupo = "Geral";
+        return this.globalServiceCulture.getResource(grupo, culture, this.getInfosFields(), (culture, infosFields) => {
+            return new Promise((resolve, reject) => {
                 var translated = new Translated([
                     new TranslatedField("pt-BR", "Anterior", "pra traz"),
                     new TranslatedField("pt-BR", "NovoItem", "Add")
                 ]);
-
-                var result = this.globalServiceCulture.setResource(grupo, translated.get(culture), infosFields);
-                return result;
-
-            }));
-
-
+                return resolve(this.globalServiceCulture.setResource(grupo, translated.get(culture), infosFields));
+            });
         });
-
     }
-
+  
     getInfosFields() {
         return {
 
