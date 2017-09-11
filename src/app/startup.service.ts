@@ -20,7 +20,7 @@ export class StartupService {
                     return resolve(GlobalService.setEndPoints(data.ConfigSettings));
                 })
                 .catch((err: any) => {
-                    Promise.resolve()
+                    Promise.reject(err);
                 });
         });
     }
