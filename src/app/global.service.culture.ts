@@ -1,4 +1,4 @@
-﻿import { Injectable, EventEmitter, NgModule } from '@angular/core'
+import { Injectable, EventEmitter, NgModule } from '@angular/core'
 import { Observable, Observer } from 'rxjs/Rx';
 import { ServiceBase } from 'app/common/services/service.base';
 import { CacheService } from 'app/common/services/cache.service';
@@ -15,7 +15,6 @@ export class Translated {
     public addRange(resources: any[], culture: string, key: string, value: string) {
         this._translatedFields = [];
         for (var index in resources) {
-            console.log("addRange", resources[index], resources[index][culture], resources[index][key], resources[index][value]);
             this._translatedFields.push(new TranslatedField(resources[index][culture], resources[index][key], resources[index][value]));
         }
     }
@@ -45,6 +44,17 @@ export class GlobalServiceCulture extends ServiceBase {
 
     constructor() {
         super();
+    }
+
+    defineCulture(culture: string = null) {
+
+        var _culture = this.getCulture();
+        if (culture)
+            _culture = culture;
+
+        this.setCulture(_culture);
+
+        return _culture;
     }
 
     public setCulture(_culture: string) {
