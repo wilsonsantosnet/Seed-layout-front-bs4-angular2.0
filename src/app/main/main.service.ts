@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,38 +12,35 @@ import { GlobalServiceCulture, Translated, TranslatedField } from '../global.ser
 @Injectable()
 export class MainService extends ServiceBase {
 
-    private _fieldsTransleted: any;
 
     constructor(private globalServiceCulture: GlobalServiceCulture, private api: ApiService<any>) {
         super();
     }
 
-
-   updateCulture(vm: any, culture: string = null) {
+    updateCulture(vm: any, culture: string = null) {
         this.getInfosTranslated(this.globalServiceCulture.defineCulture(culture)).then(result => {
             vm.generalInfos = result;
         });
     }
 
-    getGeneralInfos() {
+    getInfosTranslated(culture: string) {
 
-        var culture = this.globalServiceCulture.getCulture();
-        this.getInfosTranslated(culture).then((fields) => {
-            this._fieldsTransleted = fields
-        })
-        return this._fieldsTransleted;
-    }
-
-     getInfosTranslated(culture: string) {
         var grupo = "Geral";
         return this.globalServiceCulture.getResource(grupo, culture, this.getInfosFields(), (culture, infosFields) => {
             return new Promise((resolve, reject) => {
-                var translated = new Translated([]);
+                var translated = new Translated([
+                    new TranslatedField("pt-BR", "Voltar", "pra traz"),
+                    new TranslatedField("pt-BR", "NovoItem", "Add")
+                ]);
                 return resolve(this.globalServiceCulture.setResource(grupo, translated.get(culture), infosFields));
             });
         });
     }
-  
+
+    getInfos() {
+        return this.getInfosFields();
+    }
+
     getInfosFields() {
         return {
             buscar: { label: 'Buscar' },
