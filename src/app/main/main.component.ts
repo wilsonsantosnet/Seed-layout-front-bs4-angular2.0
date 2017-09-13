@@ -18,8 +18,9 @@ export class MainComponent implements OnInit {
 
         this.vm = {};
         this.menuIsOpen = true;
-        this.vm.generalInfos = this.mainService.getGeneralInfos();
+        this.vm.generalInfos = this.mainService.getInfosFields();
 
+        this.mainService.updateCulture(this.vm);
         GlobalService.changeCulture.subscribe((culture) => {
             this.mainService.updateCulture(this.vm, culture);
         });
