@@ -55,12 +55,12 @@ export class OperationExecutedParameters {
 export class NotificationParameters {
 
     public event: string;
-    public parentId?: number;
+    public data?: any;
 
-    constructor(_event: string, _parentId?: number) {
+    constructor(_event: string, _data?: any) {
 
         this.event = _event;
-        this.parentId = _parentId;
+        this.data = _data;
 
     }
 
@@ -106,7 +106,8 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'client';
+        this.CLIENT_ID = 'Smartsecretary-client';
         this.SCOPE = 'ssosa';
     }
 };
+
