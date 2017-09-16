@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { AuthService } from 'app/common/services/auth.service'
 import { GlobalServiceCulture } from '../global.service.culture'
-import { GlobalService } from '../global.service'
+import { GlobalService, NotificationParameters } from '../global.service'
 import { MainService } from './main.service';
 
 @Component({
@@ -14,16 +16,25 @@ export class MainComponent implements OnInit {
 
     vm: any;
     menuIsOpen: boolean;
-    constructor(private authService: AuthService, private globalServiceCulture: GlobalServiceCulture, private mainService: MainService) {
+    filter: string;
+
+    constructor(private authService: AuthService, private globalServiceCulture: GlobalServiceCulture, private mainService: MainService, private sanitizer: DomSanitizer) {
 
         this.vm = {};
         this.menuIsOpen = true;
         this.vm.generalInfos = this.mainService.getInfosFields();
-
+        this.vm.downloadUri = GlobalService.getEndPoints().DOWNLOAD;
+        this.vm.avatar = null;
+        
         this.mainService.updateCulture(this.vm);
         GlobalService.changeCulture.subscribe((culture) => {
             this.mainService.updateCulture(this.vm, culture);
         });
+    }
+
+    san(fileName) {
+        var _url = "url('" + this.vm.downloadUri + "/usuario/" + fileName + "')";
+        return this.sanitizer.sanitize(SecurityContext.HTML, _url)
     }
 
     onUpdateCulture(event, culture: string) {
@@ -49,8 +60,11 @@ export class MainComponent implements OnInit {
                 if (result.claims.tools != null) {
                     this.vm.menu = JSON.parse(result.claims.tools)
                 }
-            }
 
+                if (result.claims.avatar != null) {
+                    this.vm.avatar = result.claims.avatar
+                }
+            }
         });
     }
 
@@ -62,6 +76,12 @@ export class MainComponent implements OnInit {
     onLogout(e) {
         e.preventDefault();
         this.authService.logout();
+    }
+
+    onFilter(filter) {
+        GlobalService.notification.emit(new NotificationParameters("filter", {
+            filter: filter
+        }));
     }
 
 }

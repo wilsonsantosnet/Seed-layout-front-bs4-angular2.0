@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core'
+﻿import { Injectable, EventEmitter } from '@angular/core'
 import { Routes } from '@angular/router';
 import { CacheService } from 'app/common/services/cache.service';
 import { ECacheType } from 'app/common/type-cache.enum';
@@ -72,12 +72,11 @@ export class EndPoints {
     public AUTHAPI: string;
     public AUTH: string;
     public APP: string;
-
-    public readonly DOWNLOAD: string;
+    public DOWNLOAD: string;
 
     constructor() {
 
-        this.DOWNLOAD = this.DEFAULT + "/document/download/";
+        
     }
 
     setConfigSettings(configSettings) {
@@ -92,6 +91,7 @@ export class EndPoints {
         this.AUTHAPI = configSettings.AUTHAPI;
         this.AUTH = configSettings.AUTH;
         this.APP = configSettings.APP;
+        this.DOWNLOAD = this.DEFAULT + "/document/download/";
 
     }
 
@@ -106,7 +106,7 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Smartsecretary-client';
+        this.CLIENT_ID = 'Target-spa';
         this.SCOPE = 'ssosa';
     }
 };

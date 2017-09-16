@@ -9,7 +9,7 @@ import { AuthService } from 'app/common/services/auth.service'
 export class AppComponent implements OnInit {
 
 
-    private options: any;
+    options: any;
 
     constructor(private authService: AuthService) {
 

@@ -6,7 +6,7 @@
       </div>
       <div class="gc-profile">
         <div class="gc-profile__avatar">
-          <img src="" alt="">
+          <div [ngStyle]="{'background-image': san(vm.avatar), 'width': '90px', 'height': '90px','background-size': 'cover','background-position': 'center','border-radius': '50%' }" *ngIf="vm.avatar != null"></div>
         </div>
         <div class="gc-profile__title">
           <h3 class="gc-profile__name"><b>{{vm.userName}}</b></h3>
@@ -33,14 +33,11 @@
 
         <a class="navbar-brand p-2" href="/"><img src="../../assets/img/logo.png" alt="Target Software"></a>
 
-        <form class="form-inline p-2">
-          <input class="form-control mr-sm-2" type="text" placeholder="Procurar tarefa">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        <div class="form-inline p-2">
+          <input class="form-control mr-sm-2" type="text" placeholder="Procurar tarefa" [(ngModel)]="filter">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="onFilter(filter)">Buscar</button>
+        </div>
         <ul class="navbar-nav ml-auto p-2">
-          <li class="nav-item active">
-            <a class="nav-link" href="#" title="Mensagens"><span class="fa fa-envelope-o" aria-hidden="true"></span> <span class="badge badge-pill badge-primary">32</span></a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="#" title="Sair" (click)="onLogout($event)"><span class="fa fa-sign-out" aria-hidden="true"></span> Sair</a>
           </li>
