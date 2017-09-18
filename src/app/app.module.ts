@@ -1,4 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -32,6 +33,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         BrowserAnimationsModule,
         HttpModule,
         RoutingDefault,

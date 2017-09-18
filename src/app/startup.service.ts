@@ -12,14 +12,17 @@ export class StartupService {
 
         return new Promise((resolve: any) => {
 
-            let jsonFileURL: string = "assets/appsettings.json";
+            let v = Math.random();
+            let jsonFileURL: string = "assets/appsettings.json?v=" + v;
             this.http.get(jsonFileURL)
                 .map((res: Response) => res.json())
                 .toPromise()
                 .then((data: any) => {
+                    console.log("StartupService", v, data.ConfigSettings)
                     return resolve(GlobalService.setEndPoints(data.ConfigSettings));
                 })
                 .catch((err: any) => {
+                    console.log("StartupService", v, err);
                     Promise.reject(err);
                 });
         });

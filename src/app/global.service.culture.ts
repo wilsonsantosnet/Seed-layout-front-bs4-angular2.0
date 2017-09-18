@@ -4,6 +4,7 @@ import { ServiceBase } from 'app/common/services/service.base';
 import { CacheService } from 'app/common/services/cache.service';
 import { ECacheType } from 'app/common/type-cache.enum';
 
+
 export class Translated {
 
     private _translatedFields: TranslatedField[];
@@ -12,11 +13,23 @@ export class Translated {
         this._translatedFields = translatedFields;
     }
 
-    public addRange(resources: any[], culture: string, key: string, value: string) {
+    public adapterData(resources: any[], culture: string, key: string, value: string) {
         this._translatedFields = [];
         for (var index in resources) {
             this._translatedFields.push(new TranslatedField(resources[index][culture], resources[index][key], resources[index][value]));
         }
+    }
+
+    public adapterDataForCulture(resources: any[], culture: string, key: string, value: string) {
+        this._translatedFields = [];
+        for (var index in resources) {
+            this._translatedFields.push(new TranslatedField(culture, resources[index][key], resources[index][value]));
+        }
+    }
+
+    public getFileResource(grupo: string, culture: string) {
+        let v = Math.random();
+        return "assets/" + grupo.toLowerCase() + ".service.fields." + culture + ".json?v=" + v;
     }
 
     public get(culture: string): TranslatedField[] {
