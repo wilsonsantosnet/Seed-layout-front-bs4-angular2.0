@@ -120,6 +120,10 @@ export class GlobalServiceCulture extends ServiceBase {
 
             for (let key in InfosFields) {
                 let newField = _translatedFields.filter((item) => {
+                  
+                  if (item.key == undefined)
+                        return false;
+                  
                     return item.key.toUpperCase() == key.toUpperCase()
                 });
 
