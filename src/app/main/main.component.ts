@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
         this.vm.avatar = null;
         
         this.mainService.updateCulture(this.vm);
-        GlobalService.changeCulture.subscribe((culture) => {
+        GlobalService.getChangeCultureEmitter().subscribe((culture) => {
             this.mainService.updateCulture(this.vm, culture);
         });
     }
@@ -41,7 +41,7 @@ export class MainComponent implements OnInit {
 
         event.preventDefault();
         this.mainService.updateCulture(this.vm, culture);
-        GlobalService.changeCulture.emit(culture);
+        GlobalService.getChangeCultureEmitter().emit(culture);
 
     }
 
@@ -79,7 +79,7 @@ export class MainComponent implements OnInit {
     }
 
     onFilter(filter) {
-        GlobalService.notification.emit(new NotificationParameters("filter", {
+        GlobalService.getNotificationEmitter().emit(new NotificationParameters("filter", {
             filter: filter
         }));
     }

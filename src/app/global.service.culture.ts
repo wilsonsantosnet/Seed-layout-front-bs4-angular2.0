@@ -15,15 +15,19 @@ export class Translated {
 
     public adapterData(resources: any[], culture: string, key: string, value: string) {
         this._translatedFields = [];
-        for (var index in resources) {
-            this._translatedFields.push(new TranslatedField(resources[index][culture], resources[index][key], resources[index][value]));
+        if (resources) {
+            for (var index in resources) {
+                this._translatedFields.push(new TranslatedField(resources[index][culture], resources[index][key], resources[index][value]));
+            }
         }
     }
 
     public adapterDataForCulture(resources: any[], culture: string, key: string, value: string) {
         this._translatedFields = [];
-        for (var index in resources) {
-            this._translatedFields.push(new TranslatedField(culture, resources[index][key], resources[index][value]));
+        if (resources) {
+            for (var index in resources) {
+                this._translatedFields.push(new TranslatedField(culture, resources[index][key], resources[index][value]));
+            }
         }
     }
 

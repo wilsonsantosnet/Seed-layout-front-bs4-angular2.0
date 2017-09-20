@@ -10,7 +10,34 @@ export class GlobalService {
     static notification = new EventEmitter<NotificationParameters>();
     static changeCulture = new EventEmitter<string>();
 
-    private static _endpoint: EndPoints;
+   
+    public static getNotificationEmitter() {
+
+        if (!this.notification)
+            this.notification = new EventEmitter<NotificationParameters>();
+        return this.notification;
+    }
+
+    public static getOperationExecutedEmitter() {
+
+        if (!this.operationExecuted)
+            this.operationExecuted = new EventEmitter<OperationExecutedParameters>();
+        return this.operationExecuted;
+    }
+
+    public static getOperationRequestingEmitter() {
+
+        if (!this.operationRequesting)
+            this.operationRequesting = new EventEmitter<boolean>();
+        return this.operationRequesting;
+    }
+
+    public static getChangeCultureEmitter() {
+
+        if (!this.changeCulture)
+            this.changeCulture = new EventEmitter<string>();
+        return this.changeCulture;
+    }
 
     public static getEndPoints() {
 
@@ -33,6 +60,8 @@ export class GlobalService {
     public static operationExecutedParameters(_selector: string, _operation: any, _message: string = null) {
         return new OperationExecutedParameters(_selector, _operation, _message);
     }
+
+    private static _endpoint: EndPoints;
 
 };
 
@@ -76,7 +105,7 @@ export class EndPoints {
 
     constructor() {
 
-        
+
     }
 
     setConfigSettings(configSettings) {
