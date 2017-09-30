@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { AuthService } from 'app/common/services/auth.service'
@@ -18,11 +19,11 @@ export class MainComponent implements OnInit {
     menuIsOpen: boolean;
     filter: string;
 
-    constructor(private authService: AuthService, private globalServiceCulture: GlobalServiceCulture, private mainService: MainService, private sanitizer: DomSanitizer) {
+    constructor(private authService: AuthService, private globalServiceCulture: GlobalServiceCulture, private mainService: MainService, private sanitizer: DomSanitizer, private router: Router) {
 
         this.vm = {};
         this.menuIsOpen = true;
-        this.vm.generalInfos = this.mainService.getInfosFields();
+        this.vm.generalInfo = this.mainService.getInfosFields();
         this.vm.downloadUri = GlobalService.getEndPoints().DOWNLOAD;
         this.vm.avatar = null;
         
@@ -47,7 +48,8 @@ export class MainComponent implements OnInit {
 
     ngOnInit() {
 
-        this.authService.getCurrentUser((result) => {
+        this.authService.getCurrentUser((result, firstTime) => {
+
             if (result.isAuth) {
                 if (result.claims.name != null) {
                     this.vm.userName = result.claims.name
@@ -64,6 +66,16 @@ export class MainComponent implements OnInit {
                 if (result.claims.avatar != null) {
                     this.vm.avatar = result.claims.avatar
                 }
+
+                if (result.claims.typerole != null) {
+                    this.vm.typerole = result.claims.typerole
+                    this.vm.userRole = this.vm.userRole + "- [" + this.vm.typerole + "]";
+                }
+
+                if (this.vm.typerole == "Team" && firstTime) {
+                    this.router.navigate(["/dashboard/timesheet"]);
+                }
+
             }
         });
     }

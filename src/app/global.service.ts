@@ -10,7 +10,7 @@ export class GlobalService {
     static notification = new EventEmitter<NotificationParameters>();
     static changeCulture = new EventEmitter<string>();
 
-   
+
     public static getNotificationEmitter() {
 
         if (!this.notification)
@@ -84,12 +84,14 @@ export class OperationExecutedParameters {
 export class NotificationParameters {
 
     public event: string;
+    public otherEvents: string[];
     public data?: any;
 
-    constructor(_event: string, _data?: any) {
+    constructor(_event: string, _data?: any, _otherEvents?: string[]) {
 
         this.event = _event;
         this.data = _data;
+        this.otherEvents = _otherEvents || [""];
 
     }
 

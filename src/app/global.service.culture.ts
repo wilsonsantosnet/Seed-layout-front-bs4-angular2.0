@@ -89,6 +89,7 @@ export class GlobalServiceCulture extends ServiceBase {
     public setResource<T>(grupo: string, translatedFields: any[], InfosFields: any) {
 
         var mergeFileds = this.makeInfoFields(translatedFields, InfosFields);
+
         if (mergeFileds) {
             this.setResourceCookie(grupo, mergeFileds);
         }
@@ -114,16 +115,15 @@ export class GlobalServiceCulture extends ServiceBase {
 
     private makeInfoFields(translatedFields: TranslatedField[], InfosFields) {
 
-
         let _translatedFields = super.objectToArray(translatedFields);
         if (_translatedFields) {
 
             for (let key in InfosFields) {
                 let newField = _translatedFields.filter((item) => {
-                  
-                  if (item.key == undefined)
+
+                    if (item.key == undefined)
                         return false;
-                  
+
                     return item.key.toUpperCase() == key.toUpperCase()
                 });
 

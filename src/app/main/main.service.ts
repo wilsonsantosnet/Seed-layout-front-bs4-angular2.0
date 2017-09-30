@@ -19,7 +19,7 @@ export class MainService extends ServiceBase {
 
     updateCulture(vm: any, culture: string = null) {
         this.getInfosTranslated(this.globalServiceCulture.defineCulture(culture)).then(result => {
-            vm.generalInfos = result;
+            vm.generalInfo = result;
         });
     }
 
