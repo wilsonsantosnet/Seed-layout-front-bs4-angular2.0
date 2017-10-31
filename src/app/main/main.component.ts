@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
     }
 
     san(fileName) {
-        var _url = "url('" + this.vm.downloadUri + "/usuario/" + fileName + "')";
+        var _url = "url('" + this.vm.downloadUri + "/assinante/" + fileName + "')";
         return this.sanitizer.sanitize(SecurityContext.HTML, _url)
     }
 
@@ -72,10 +72,8 @@ export class MainComponent implements OnInit {
                     this.vm.userRole = this.vm.userRole + "- [" + this.vm.typerole + "]";
                 }
 
-                if (this.vm.typerole == "Team" && firstTime) {
-                    this.router.navigate(["/dashboard/timesheet"]);
-                }
-
+                if (firstTime)
+                  this.router.navigate(["/wellcome"]);
             }
         });
     }
@@ -94,6 +92,8 @@ export class MainComponent implements OnInit {
         GlobalService.getNotificationEmitter().emit(new NotificationParameters("filter", {
             filter: filter
         }));
+
+        this.router.navigate(["dashboard/agenda/" + filter]);
     }
 
 }

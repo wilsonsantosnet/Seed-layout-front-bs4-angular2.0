@@ -15,9 +15,12 @@ import { ApiService } from 'app/common/services/api.service';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { LoadingComponent } from './common/components/loading.component';
+import { LoadingTopComponent } from './common/components/loading-top.component';
 import { MainService } from './main/main.service';
 import { GlobalServiceCulture } from './global.service.culture';
 import { StartupService } from './startup.service';
+
+
 
 export function startupServiceFactory(startupService: StartupService): Function {
     return () => startupService.load();
@@ -29,6 +32,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
         MainComponent,
         LoginComponent,
         LoadingComponent,
+        LoadingTopComponent,
         ConfirmModalComponent,
     ],
     imports: [

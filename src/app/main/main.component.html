@@ -17,7 +17,7 @@
     <ul class="gc-menu__list list-unstyled">
       <li *ngFor="let item of vm.menu">
         <a routerLink="{{item.Value}}">
-          <span class="gc-menu__list__icon fa fa-edit"></span>
+          <span class="gc-menu__list__icon {{item.Icon}}"></span>
           <span class="gc-menu__list__text">{{item.Name}}</span>
         </a>
       </li>
@@ -38,14 +38,16 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="onFilter(filter)">Buscar</button>
         </div>
         <ul class="navbar-nav ml-auto p-2">
+          <li>
+            <loadingTop></loadingTop>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="#" title="Sair" (click)="onLogout($event)"><span class="fa fa-sign-out" aria-hidden="true"></span> Sair</a>
           </li>
-     
         </ul>
       </nav>
+      
     </div>
-
     <div class="gc-body">
       <router-outlet></router-outlet>
     </div>
@@ -53,12 +55,10 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col">
-            Copyright ©Target Software 2017. Todos os direitos reservados.
+            Copyright ©SmartSecretary Software 2017. Todos os direitos reservados.
           </div>
         </div>
       </div>
     </div>
   </div>
-
- 
 </div>

@@ -133,12 +133,13 @@ export class AuthSettings {
     public readonly TYPE_LOGIN: string;
     public readonly CLIENT_ID: string;
     public readonly SCOPE: string;
-
+    public readonly CACHE_TYPE: ECacheType;
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Target-spa';
+        this.CLIENT_ID = 'Smartsecretary-client';
         this.SCOPE = 'ssosa';
+        this.CACHE_TYPE = ECacheType.LOCAL;
     }
 };
 
