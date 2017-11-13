@@ -11,4 +11,4 @@ const APP_ROUTES_CUSTOM: Routes = [
 
 ]
 
-export const routingCustom: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES_CUSTOM);
+export const RoutingCustom: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES_CUSTOM);
