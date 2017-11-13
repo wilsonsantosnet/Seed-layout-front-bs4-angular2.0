@@ -137,7 +137,7 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Smartsecretary-client';
+        this.CLIENT_ID = 'Target-spa';
         this.SCOPE = 'ssosa';
         this.CACHE_TYPE = ECacheType.LOCAL;
     }

@@ -86,6 +86,10 @@ export class GlobalServiceCulture extends ServiceBase {
 
     }
 
+    public reset() {
+        CacheService.removePartialKey(this.getCulture(), ECacheType.COOKIE);
+    }
+
     public setResource<T>(grupo: string, translatedFields: any[], InfosFields: any) {
 
         var mergeFileds = this.makeInfoFields(translatedFields, InfosFields);
