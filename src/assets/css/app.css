@@ -151,3 +151,8 @@ dl {
 .gc-modal.modal.fade.in.show {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+
+.ng2-tag-input__text-input {
+  background-color: transparent !important;
+}
