@@ -2,7 +2,9 @@
   <app-menu-aside [(vm)]='vm' (onToggleMenu)="onToggleMenu($event)" (onLogout)="onLogout($event)" (onFilter)="onFilter($event)" ></app-menu-aside>
   <div class="gc-content-aside">
     <div class="gc-body">
-      <router-outlet></router-outlet>
+      <div class="container-app">
+        <router-outlet></router-outlet>
+       </div>
     </div>
     <app-footer></app-footer>
   </div>
