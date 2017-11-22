@@ -23,6 +23,10 @@ export class MainService extends ServiceBase {
         });
     }
 
+    resetCulture() {
+        this.globalServiceCulture.reset();
+    }
+
     getInfosTranslated(culture: string) {
 
         var grupo = "Geral";
