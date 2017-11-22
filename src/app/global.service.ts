@@ -49,8 +49,9 @@ export class GlobalService {
         return this._endpoint;
     }
 
-    public static setEndPoints(config: any) {
-        GlobalService.getEndPoints().setConfigSettings(config);
+    public static setAppsettings(config: any) {
+        GlobalService.getEndPoints().setConfigSettings(config.ConfigSettings);
+        GlobalService.getAuthSettings().setSSO(config.SSO);
     }
 
     public static getAuthSettings() {
@@ -130,16 +131,27 @@ export class EndPoints {
 
 export class AuthSettings {
 
-    public readonly TYPE_LOGIN: string;
-    public readonly CLIENT_ID: string;
-    public readonly SCOPE: string;
-    public readonly CACHE_TYPE: ECacheType;
+    public TYPE_LOGIN: string;
+    public CLIENT_ID: string;
+    public SCOPE: string;
+    public CACHE_TYPE: ECacheType;
+
+    setSSO(sso) {
+        if (sso) {
+            this.init(sso);
+        }
+    }
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Target-spa';
-        this.SCOPE = 'ssosa';
+        this.CLIENT_ID = "Seed-spa";
+        this.SCOPE = "ssosa";
         this.CACHE_TYPE = ECacheType.LOCAL;
+    }
+
+    init(sso) {
+        this.CLIENT_ID = sso.CLIENT_ID;
+        this.SCOPE = sso.SCOPE;
     }
 };
 

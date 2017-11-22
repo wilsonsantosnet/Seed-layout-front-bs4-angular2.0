@@ -18,8 +18,8 @@ export class StartupService {
                 .map((res: Response) => res.json())
                 .toPromise()
                 .then((data: any) => {
-                    console.log("StartupService", v, data.ConfigSettings)
-                    return resolve(GlobalService.setEndPoints(data.ConfigSettings));
+                    console.log("StartupService", v, data)
+                    return resolve(GlobalService.setAppsettings(data));
                 })
                 .catch((err: any) => {
                     console.log("StartupService", v, err);

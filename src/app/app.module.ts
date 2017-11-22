@@ -1,7 +1,7 @@
-﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -19,6 +19,11 @@ import { LoadingTopComponent } from './common/components/loading-top.component';
 import { MainService } from './main/main.service';
 import { GlobalServiceCulture } from './global.service.culture';
 import { StartupService } from './startup.service';
+import { MenuAsideComponent } from './common/components/menu-aside.component';
+import { MenuTopComponent } from 'app/common/components/menu-top.component';
+import { FooterComponent } from 'app/common/components/footer.component';
+
+
 
 export function startupServiceFactory(startupService: StartupService): Function {
     return () => startupService.load();
@@ -32,6 +37,9 @@ export function startupServiceFactory(startupService: StartupService): Function 
         LoadingComponent,
         LoadingTopComponent,
         ConfirmModalComponent,
+        MenuAsideComponent,
+        MenuTopComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,
