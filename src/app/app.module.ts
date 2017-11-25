@@ -12,6 +12,7 @@ import { RoutingCustom } from './app.custom.routing';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from 'app/common/services/auth.service'
 import { ApiService } from 'app/common/services/api.service';
+import { ServiceBase } from './common/services/service.base';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { LoadingComponent } from './common/components/loading.component';
@@ -63,6 +64,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
         AuthService,
         ApiService,
         MainService,
+        ServiceBase,
         GlobalServiceCulture
     ],
     bootstrap: [AppComponent]
