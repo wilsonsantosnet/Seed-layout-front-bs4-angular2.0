@@ -57,6 +57,10 @@ export class GlobalService {
     public static getAuthSettings() {
         return new AuthSettings();
     }
+  
+    public static getGlobalSettings() {
+        return new GlobalSettings();
+    }
 
     public static operationExecutedParameters(_selector: string, _operation: any, _message: string = null) {
         return new OperationExecutedParameters(_selector, _operation, _message);
@@ -65,6 +69,15 @@ export class GlobalService {
     private static _endpoint: EndPoints;
 
 };
+
+export class GlobalSettings {
+
+    public enabledSelect2: boolean;
+
+    constructor() {
+        this.enabledSelect2 = true;
+    }
+}
 
 export class OperationExecutedParameters {
 
