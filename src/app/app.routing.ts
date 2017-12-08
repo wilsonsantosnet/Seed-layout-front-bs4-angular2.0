@@ -7,4 +7,4 @@ const APP_ROUTES: Routes = [
     { path: '', component: MainComponent },
 ]
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
+export const RoutingDefault: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
