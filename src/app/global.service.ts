@@ -57,7 +57,7 @@ export class GlobalService {
     public static getAuthSettings() {
         return new AuthSettings();
     }
-  
+
     public static getGlobalSettings() {
         return new GlobalSettings();
     }
@@ -69,15 +69,6 @@ export class GlobalService {
     private static _endpoint: EndPoints;
 
 };
-
-export class GlobalSettings {
-
-    public enabledSelect2: boolean;
-
-    constructor() {
-        this.enabledSelect2 = true;
-    }
-}
 
 export class OperationExecutedParameters {
 
@@ -141,6 +132,14 @@ export class EndPoints {
     }
 
 };
+export class GlobalSettings {
+
+    public enabledSelect2: boolean;
+
+    constructor() {
+        this.enabledSelect2 = true;
+    }
+}
 
 export class AuthSettings {
 
@@ -157,7 +156,7 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = "Seed-spa";
+        this.CLIENT_ID = 'Target-spa';
         this.SCOPE = "ssosa";
         this.CACHE_TYPE = ECacheType.LOCAL;
     }

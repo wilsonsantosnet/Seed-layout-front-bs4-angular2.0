@@ -34,8 +34,11 @@
         "../node_modules/tinymce/tinymce.js",
         "../node_modules/tinymce/themes/modern/theme.js",
         "../node_modules/tinymce/plugins/link/plugin.js",
+        "../node_modules/tinymce/plugins/advlist/plugin.js",
+        "../node_modules/tinymce/plugins/lists/plugin.js",
         "../node_modules/tinymce/plugins/paste/plugin.js",
-        "../node_modules/tinymce/plugins/table/plugin.js"
+        "../node_modules/tinymce/plugins/table/plugin.js",
+        "./assets/jquery.nestable.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
