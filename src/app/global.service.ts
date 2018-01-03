@@ -145,6 +145,7 @@ export class AuthSettings {
 
     public TYPE_LOGIN: string;
     public CLIENT_ID: string;
+    public CLIENT_ID_RO: string;
     public SCOPE: string;
     public CACHE_TYPE: ECacheType;
 
@@ -156,7 +157,8 @@ export class AuthSettings {
 
     constructor() {
         this.TYPE_LOGIN = "SSO";
-        this.CLIENT_ID = 'Target-spa';
+        this.CLIENT_ID = 'Seed-spa';
+        this.CLIENT_ID_RO = 'Seed-spa';
         this.SCOPE = "ssosa";
         this.CACHE_TYPE = ECacheType.LOCAL;
     }
