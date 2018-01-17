@@ -18,7 +18,7 @@ export class MainService extends ServiceBase {
     }
 
     updateCulture(vm: any, culture: string = null) {
-        this.getInfosTranslated(this.globalServiceCulture.defineCulture(culture)).then(result => {
+        this.getInfosTranslated(this.globalServiceCulture.defineCulture(culture)).then((result: any) => {
             vm.generalInfo = result;
         });
     }
@@ -30,7 +30,7 @@ export class MainService extends ServiceBase {
     getInfosTranslated(culture: string) {
 
         var grupo = "Geral";
-        return this.globalServiceCulture.getResource(grupo, culture, this.getInfosFields(), (culture, infosFields) => {
+        return this.globalServiceCulture.getResource(grupo, culture, this.getInfosFields(), (culture: any, infosFields: any) => {
             return new Promise((resolve, reject) => {
                 var translated = new Translated([
                     new TranslatedField("pt-BR", "Voltar", "pra traz"),

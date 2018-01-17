@@ -101,7 +101,7 @@ export class GlobalServiceCulture extends ServiceBase {
         return mergeFileds;
     }
 
-    public getResource<T>(grupo: string, culture: string, infosFields: any, callbackData) {
+    public getResource<T>(grupo: string, culture: string, infosFields: any, callbackData: any) {
 
         var result = CacheService.get(this.makeKeyCookieCulture(culture, grupo), ECacheType.COOKIE);
         if (result) {
@@ -113,11 +113,11 @@ export class GlobalServiceCulture extends ServiceBase {
             return callbackData(culture, infosFields);
     }
 
-    private makeKeyCookieCulture(culture, grupo) {
+    private makeKeyCookieCulture(culture: any, grupo: any) {
         return culture + '-' + grupo;
     }
 
-    private makeInfoFields(translatedFields: TranslatedField[], InfosFields) {
+    private makeInfoFields(translatedFields: TranslatedField[], InfosFields: any) {
 
         let _translatedFields = super.objectToArray(translatedFields);
         if (_translatedFields) {
@@ -140,7 +140,7 @@ export class GlobalServiceCulture extends ServiceBase {
         return InfosFields;
     }
 
-    private setResourceCookie(grupo, mergeFileds) {
+    private setResourceCookie(grupo: any, mergeFileds: any) {
         CacheService.add(this.makeKeyCookieCulture(this.getCulture(), grupo), JSON.stringify(mergeFileds), ECacheType.COOKIE, 1);
     }
 }

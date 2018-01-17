@@ -115,13 +115,13 @@ export class EndPoints {
 
     }
 
-    setConfigSettings(configSettings) {
+    setConfigSettings(configSettings: any) {
         if (configSettings) {
             this.init(configSettings);
         }
     }
 
-    init(configSettings) {
+    init(configSettings: any) {
 
         this.DEFAULT = configSettings.DEFAULT;
         this.AUTHAPI = configSettings.AUTHAPI;
@@ -149,7 +149,7 @@ export class AuthSettings {
     public SCOPE: string;
     public CACHE_TYPE: ECacheType;
 
-    setSSO(sso) {
+    setSSO(sso: any) {
         if (sso) {
             this.init(sso);
         }
@@ -163,7 +163,7 @@ export class AuthSettings {
         this.CACHE_TYPE = ECacheType.LOCAL;
     }
 
-    init(sso) {
+    init(sso: any) {
         this.CLIENT_ID = sso.CLIENT_ID;
         this.SCOPE = sso.SCOPE;
     }

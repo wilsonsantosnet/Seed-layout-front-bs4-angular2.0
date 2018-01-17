@@ -26,15 +26,15 @@ export class MainComponent implements OnInit {
         this.vm.generalInfo = this.mainService.getInfosFields();
         this.vm.downloadUri = GlobalService.getEndPoints().DOWNLOAD;
         this.vm.avatar = null;
-        
+
         this.mainService.updateCulture(this.vm);
-        GlobalService.getChangeCultureEmitter().subscribe((culture) => {
+        GlobalService.getChangeCultureEmitter().subscribe((culture: any) => {
             this.mainService.updateCulture(this.vm, culture);
         });
     }
 
 
-    onUpdateCulture(event, culture: string) {
+    onUpdateCulture(event: any, culture: string) {
 
         event.preventDefault();
         this.mainService.updateCulture(this.vm, culture);
@@ -44,7 +44,7 @@ export class MainComponent implements OnInit {
 
     ngOnInit() {
 
-        this.authService.getCurrentUser((result, firstTime) => {
+        this.authService.getCurrentUser((result: any, firstTime: any) => {
 
             if (result.isAuth) {
                 if (result.claims.name != null) {
@@ -69,23 +69,23 @@ export class MainComponent implements OnInit {
                 }
 
                 if (firstTime)
-                  this.router.navigate(["/home"]);
+                    this.router.navigate(["/home"]);
             }
         });
     }
 
-    onToggleMenu() {
+    onToggleMenu(e: any) {
 
         this.menuIsOpen = !this.menuIsOpen
     }
 
-    onLogout(e) {
+    onLogout(e: any) {
         e.preventDefault();
         this.mainService.resetCulture();
         this.authService.logout();
     }
 
-    onFilter(filter) {
+    onFilter(filter: any) {
 
     }
 
