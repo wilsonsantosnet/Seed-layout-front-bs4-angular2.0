@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs/Rx';
 import { ServiceBase } from 'app/common/services/service.base';
 import { CacheService } from 'app/common/services/cache.service';
 import { ECacheType } from 'app/common/type-cache.enum';
-
+import { ApiService } from 'app/common/services/api.service';
 
 export class Translated {
 
@@ -56,14 +56,18 @@ export class TranslatedField {
         this.value = _value;
     }
 }
+
+@Injectable()
 export class GlobalServiceCulture extends ServiceBase {
 
+    private _cacheType: ECacheType;
 
-    constructor() {
+    constructor(private api: ApiService<any>) {
         super();
+        this._cacheType = GlobalService.getGlobalSettings().CACHE_TYPE;
     }
 
-    defineCulture(culture: string = null) {
+    public defineCulture(culture: string = null) {
 
         var _culture = this.getCulture();
         if (culture)
@@ -76,18 +80,18 @@ export class GlobalServiceCulture extends ServiceBase {
 
     public setCulture(_culture: string) {
 
-        CacheService.add('culture', _culture, ECacheType.COOKIE);
+        CacheService.add('culture', _culture, this._cacheType);
     }
 
     public getCulture() {
 
-        let culture = CacheService.get('culture', ECacheType.COOKIE);
+        let culture = CacheService.get('culture', this._cacheType);
         return culture ? culture : navigator.language;
 
     }
 
     public reset() {
-        CacheService.removePartialKey(this.getCulture(), ECacheType.COOKIE);
+        CacheService.removePartialKey(this.getCulture(), this._cacheType);
     }
 
     public setResource<T>(grupo: string, translatedFields: any[], InfosFields: any) {
@@ -95,15 +99,37 @@ export class GlobalServiceCulture extends ServiceBase {
         var mergeFileds = this.makeInfoFields(translatedFields, InfosFields);
 
         if (mergeFileds) {
-            this.setResourceCookie(grupo, mergeFileds);
+            this.setResourceCache(grupo, mergeFileds);
         }
 
         return mergeFileds;
     }
 
+    public getInfosTranslatedStrategy(grupo: string, culture: string, infos: any, translatedFields: TranslatedField[]) {
+
+        if (GlobalService.getGlobalSettings().translateStrategy.type == "API") {
+            return this.getResource(grupo, culture, infos, (culture: any, infosFields: any) => {
+                return new Promise((resolve, reject) => {
+                    this.api.setResource(GlobalService.getGlobalSettings().translateStrategy.resource).get({ group: grupo }).subscribe((result) => {
+                        var translated = new Translated(result.dataList);
+                        return resolve(this.setResource(grupo, translated.get(culture), infosFields));
+                    });
+                });
+            });
+        }
+        else {
+            return this.getResource(grupo, culture, infos, (culture: any, infosFields: any) => {
+                return new Promise((resolve, reject) => {
+                    var translated = new Translated(translatedFields);
+                    return resolve(this.setResource(grupo, translated.get(culture), infosFields));
+                });
+            });
+        }
+    }
+
     public getResource<T>(grupo: string, culture: string, infosFields: any, callbackData: any) {
 
-        var result = CacheService.get(this.makeKeyCookieCulture(culture, grupo), ECacheType.COOKIE);
+        var result = CacheService.get(this.makeKeyCacheCulture(culture, grupo), this._cacheType);
         if (result) {
             return new Promise((resolve, reject) => {
                 return resolve(JSON.parse(result));
@@ -113,7 +139,9 @@ export class GlobalServiceCulture extends ServiceBase {
             return callbackData(culture, infosFields);
     }
 
-    private makeKeyCookieCulture(culture: any, grupo: any) {
+
+
+    private makeKeyCacheCulture(culture: any, grupo: any) {
         return culture + '-' + grupo;
     }
 
@@ -140,7 +168,7 @@ export class GlobalServiceCulture extends ServiceBase {
         return InfosFields;
     }
 
-    private setResourceCookie(grupo: any, mergeFileds: any) {
-        CacheService.add(this.makeKeyCookieCulture(this.getCulture(), grupo), JSON.stringify(mergeFileds), ECacheType.COOKIE, 1);
+    private setResourceCache(grupo: any, mergeFileds: any) {
+        CacheService.add(this.makeKeyCacheCulture(this.getCulture(), grupo), JSON.stringify(mergeFileds), this._cacheType, 1);
     }
 }
