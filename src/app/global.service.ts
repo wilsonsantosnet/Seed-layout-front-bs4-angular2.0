@@ -135,12 +135,19 @@ export class EndPoints {
 export class GlobalSettings {
 
     public enabledSelect2: boolean;
+    public actionLeft: boolean;
+    public CACHE_TYPE: ECacheType;
+    public translateStrategy: any;
 
     constructor() {
         this.enabledSelect2 = true;
+        this.actionLeft = true;
+        this.CACHE_TYPE = ECacheType.LOCAL;
+        this.translateStrategy = {
+            type: "SERVICE-FIELD",
+        }
     }
 }
-
 export class AuthSettings {
 
     public TYPE_LOGIN: string;
