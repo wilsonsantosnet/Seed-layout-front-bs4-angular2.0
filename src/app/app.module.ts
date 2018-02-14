@@ -5,6 +5,8 @@ import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ConfirmModalComponent } from 'app/common/components/confirm-modal.component';
 import { RoutingDefault } from './app.routing';
@@ -15,6 +17,10 @@ import { ApiService } from 'app/common/services/api.service';
 import { ServiceBase } from './common/services/service.base';
 import { MainService } from './main/main.service';
 import { StartupService } from './startup.service';
+
+import { NotificacaoService } from './main/notificacao/notificacao.service';
+import { NotificacaoServiceFields } from './main/notificacao/notificacao.service.fields';
+
 import { GlobalServiceCulture } from './global.service.culture';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -23,7 +29,6 @@ import { LoadingTopComponent } from './common/components/loading-top.component';
 import { MenuAsideComponent } from './common/components/menu-aside.component';
 import { MenuTopComponent } from 'app/common/components/menu-top.component';
 import { FooterComponent } from 'app/common/components/footer.component';
-
 
 
 export function startupServiceFactory(startupService: StartupService): Function {
@@ -50,7 +55,8 @@ export function startupServiceFactory(startupService: StartupService): Function 
         RoutingDefault,
         RoutingCustom,
         SimpleNotificationsModule.forRoot(),
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        PopoverModule.forRoot(),
     ],
     providers: [
         HttpModule,
@@ -65,6 +71,8 @@ export function startupServiceFactory(startupService: StartupService): Function 
         ApiService,
         MainService,
         ServiceBase,
+        NotificacaoService,
+        NotificacaoServiceFields,
         GlobalServiceCulture
     ],
     bootstrap: [AppComponent]

@@ -3,14 +3,17 @@ import { Observable, Observer } from 'rxjs/Rx';
 import { ServiceBase } from 'app/common/services/service.base';
 import { CacheService } from 'app/common/services/cache.service';
 import { ECacheType } from 'app/common/type-cache.enum';
+import { GlobalService } from './global.service';
 import { ApiService } from 'app/common/services/api.service';
 
 export class Translated {
 
     private _translatedFields: TranslatedField[];
 
+
     constructor(translatedFields: TranslatedField[]) {
         this._translatedFields = translatedFields;
+
     }
 
     public adapterData(resources: any[], culture: string, key: string, value: string) {
