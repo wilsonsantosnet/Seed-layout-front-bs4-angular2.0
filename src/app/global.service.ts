@@ -138,11 +138,13 @@ export class GlobalSettings {
     public actionLeft: boolean;
     public CACHE_TYPE: ECacheType;
     public translateStrategy: any;
+    public enabledOldBack: boolean;
 
     constructor() {
         this.enabledSelect2 = true;
         this.actionLeft = true;
         this.CACHE_TYPE = ECacheType.LOCAL;
+        this.enabledOldBack = false;
         this.translateStrategy = {
             type: "SERVICE-FIELD",
         }
