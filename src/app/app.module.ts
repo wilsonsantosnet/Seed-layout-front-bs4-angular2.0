@@ -18,9 +18,6 @@ import { ServiceBase } from './common/services/service.base';
 import { MainService } from './main/main.service';
 import { StartupService } from './startup.service';
 
-import { NotificacaoService } from './main/notificacao/notificacao.service';
-import { NotificacaoServiceFields } from './main/notificacao/notificacao.service.fields';
-
 import { GlobalServiceCulture } from './global.service.culture';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -71,8 +68,6 @@ export function startupServiceFactory(startupService: StartupService): Function 
         ApiService,
         MainService,
         ServiceBase,
-        NotificacaoService,
-        NotificacaoServiceFields,
         GlobalServiceCulture
     ],
     bootstrap: [AppComponent]
