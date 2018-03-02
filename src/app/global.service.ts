@@ -1,12 +1,12 @@
 ﻿import { Injectable, EventEmitter } from '@angular/core'
 import { Routes } from '@angular/router';
-import { CacheService } from 'app/common/services/cache.service';
-import { ECacheType } from 'app/common/type-cache.enum';
+import { CacheService } from './common/services/cache.service';
+import { ECacheType } from './common/type-cache.enum';
 
 export class GlobalService {
 
     static operationExecuted = new EventEmitter<OperationExecutedParameters>();
-    static operationRequesting = new EventEmitter<boolean>();
+    static operationRequesting = new EventEmitter<OperationRequest>();
     static notification = new EventEmitter<NotificationParameters>();
     static changeCulture = new EventEmitter<string>();
 
@@ -28,7 +28,7 @@ export class GlobalService {
     public static getOperationRequestingEmitter() {
 
         if (!this.operationRequesting)
-            this.operationRequesting = new EventEmitter<boolean>();
+            this.operationRequesting = new EventEmitter<OperationRequest>();
         return this.operationRequesting;
     }
 
@@ -84,6 +84,19 @@ export class OperationExecutedParameters {
         this.message = _message;
     }
 
+}
+
+export class OperationRequest {
+
+    resourceName: string;
+    count: number;
+    value: boolean;
+
+    constructor(resourceName: string, count : number, value : boolean) {
+        this.resourceName = resourceName;
+        this.count = count;
+        this.value = value;
+    }
 }
 
 export class NotificationParameters {

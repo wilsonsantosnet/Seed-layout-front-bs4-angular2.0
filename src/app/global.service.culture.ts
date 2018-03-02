@@ -1,10 +1,10 @@
 ﻿import { Injectable, EventEmitter, NgModule } from '@angular/core'
 import { Observable, Observer } from 'rxjs/Rx';
-import { ServiceBase } from 'app/common/services/service.base';
-import { CacheService } from 'app/common/services/cache.service';
-import { ECacheType } from 'app/common/type-cache.enum';
+import { ServiceBase } from './common/services/service.base';
+import { CacheService } from './common/services/cache.service';
+import { ECacheType } from './common/type-cache.enum';
 import { GlobalService } from './global.service';
-import { ApiService } from 'app/common/services/api.service';
+import { ApiService } from './common/services/api.service';
 
 export class Translated {
 

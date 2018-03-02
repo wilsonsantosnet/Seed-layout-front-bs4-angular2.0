@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { GlobalService } from 'app/global.service';
+import { GlobalService } from './global.service';
 
 @Injectable()
 export class StartupService {
