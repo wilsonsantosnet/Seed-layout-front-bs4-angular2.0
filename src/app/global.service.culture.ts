@@ -1,19 +1,18 @@
-﻿import { Injectable, EventEmitter, NgModule } from '@angular/core'
+import { Injectable, EventEmitter, NgModule } from '@angular/core'
 import { Observable, Observer } from 'rxjs/Rx';
-import { ServiceBase } from './common/services/service.base';
-import { CacheService } from './common/services/cache.service';
-import { ECacheType } from './common/type-cache.enum';
-import { GlobalService } from './global.service';
-import { ApiService } from './common/services/api.service';
+import { ServiceBase } from 'app/common/services/service.base';
+import { CacheService } from 'app/common/services/cache.service';
+import { ECacheType } from 'app/common/type-cache.enum';
+import { GlobalService } from 'app/global.service';
+
 
 export class Translated {
 
     private _translatedFields: TranslatedField[];
-
+    
 
     constructor(translatedFields: TranslatedField[]) {
         this._translatedFields = translatedFields;
-
     }
 
     public adapterData(resources: any[], culture: string, key: string, value: string) {
@@ -59,18 +58,16 @@ export class TranslatedField {
         this.value = _value;
     }
 }
-
-@Injectable()
 export class GlobalServiceCulture extends ServiceBase {
 
-    private _cacheType: ECacheType;
+    private readonly _cacheType: ECacheType;
 
-    constructor(private api: ApiService<any>) {
+    constructor() {
         super();
-        this._cacheType = GlobalService.getGlobalSettings().CACHE_TYPE;
+        this._cacheType = GlobalService.getAuthSettings().CACHE_TYPE;
     }
 
-    public defineCulture(culture: string = null) {
+    defineCulture(culture: string = null) {
 
         var _culture = this.getCulture();
         if (culture)
@@ -108,29 +105,7 @@ export class GlobalServiceCulture extends ServiceBase {
         return mergeFileds;
     }
 
-    public getInfosTranslatedStrategy(grupo: string, culture: string, infos: any, translatedFields: TranslatedField[]) {
-
-        if (GlobalService.getGlobalSettings().translateStrategy.type == "API") {
-            return this.getResource(grupo, culture, infos, (culture: any, infosFields: any) => {
-                return new Promise((resolve, reject) => {
-                    this.api.setResource(GlobalService.getGlobalSettings().translateStrategy.resource).get({ group: grupo }).subscribe((result) => {
-                        var translated = new Translated(result.dataList);
-                        return resolve(this.setResource(grupo, translated.get(culture), infosFields));
-                    });
-                });
-            });
-        }
-        else {
-            return this.getResource(grupo, culture, infos, (culture: any, infosFields: any) => {
-                return new Promise((resolve, reject) => {
-                    var translated = new Translated(translatedFields);
-                    return resolve(this.setResource(grupo, translated.get(culture), infosFields));
-                });
-            });
-        }
-    }
-
-    public getResource<T>(grupo: string, culture: string, infosFields: any, callbackData: any) {
+    public getResource<T>(grupo: string, culture: string, infosFields: any, callbackData) {
 
         var result = CacheService.get(this.makeKeyCacheCulture(culture, grupo), this._cacheType);
         if (result) {
@@ -142,13 +117,11 @@ export class GlobalServiceCulture extends ServiceBase {
             return callbackData(culture, infosFields);
     }
 
-
-
-    private makeKeyCacheCulture(culture: any, grupo: any) {
+    private makeKeyCacheCulture(culture, grupo) {
         return culture + '-' + grupo;
     }
 
-    private makeInfoFields(translatedFields: TranslatedField[], InfosFields: any) {
+    private makeInfoFields(translatedFields: TranslatedField[], InfosFields) {
 
         let _translatedFields = super.objectToArray(translatedFields);
         if (_translatedFields) {
@@ -171,7 +144,7 @@ export class GlobalServiceCulture extends ServiceBase {
         return InfosFields;
     }
 
-    private setResourceCache(grupo: any, mergeFileds: any) {
+    private setResourceCache(grupo, mergeFileds) {
         CacheService.add(this.makeKeyCacheCulture(this.getCulture(), grupo), JSON.stringify(mergeFileds), this._cacheType, 1);
     }
 }
