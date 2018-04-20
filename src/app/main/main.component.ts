@@ -81,8 +81,11 @@ export class MainComponent implements OnInit {
 
     onLogout(e: any) {
         e.preventDefault();
-        this.mainService.resetCulture();
-        this.authService.logout();
+        var conf = GlobalService.operationExecutedParameters("confirm-modal", () => {
+            this.mainService.resetCulture();
+            this.authService.logout();
+        }, "Deseja Realmente Sair do Sistema");
+        GlobalService.getOperationExecutedEmitter().emit(conf);
     }
 
     onFilter(filter: any) {
