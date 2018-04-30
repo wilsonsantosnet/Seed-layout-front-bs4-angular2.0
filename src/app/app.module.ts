@@ -26,7 +26,7 @@ import { LoadingComponent } from './common/components/loading.component';
 import { MenuAsideComponent } from './common/components/menu-aside.component';
 import { MenuTopComponent } from './common/components/menu-top.component';
 import { FooterComponent } from './common/components/footer.component';
-
+import { AuthGuard } from 'app/common/services/auth.guard';
 
 export function startupServiceFactory(startupService: StartupService): Function {
     return () => startupService.load();
@@ -65,6 +65,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
         },
         AuthService,
         ApiService,
+        AuthGuard,
         MainService,
         ServiceBase,
         GlobalServiceCulture
